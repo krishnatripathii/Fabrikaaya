@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabrikaaya — The Fabric Revolution Has Arrived</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-black: #211719;
+    --charcoal: #544449;
+    --mid-gray: #82777F;
+    --light-mauve: #B5ACB1;
+    --soft-beige: #E8DCE0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep-black);
+    color: var(--soft-beige);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(33,23,25,0.7);
+    border-bottom: 1px solid rgba(181,172,177,0.08);
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--soft-beige);
+    text-decoration: none;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .nav-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.45em;
+    color: var(--light-mauve);
+    text-transform: uppercase;
+  }
+  .nav-cta {
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--deep-black);
+    background: var(--soft-beige);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover {
+    background: var(--light-mauve);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hbc1 {
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(84,68,73,0.35) 0%, transparent 65%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hbc2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(181,172,177,0.1) 0%, transparent 70%);
+    top: 20%; right: 10%;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.6em;
+    color: var(--light-mauve);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--soft-beige);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--light-mauve);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--mid-gray);
+    margin: 28px 0 56px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-desc {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--light-mauve);
+    max-width: 520px;
+    line-height: 1.9;
+    margin: 0 auto 56px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 0;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+  .waitlist-form input {
+    flex: 1;
+    background: rgba(232,220,224,0.07);
+    border: 1px solid rgba(181,172,177,0.2);
+    border-right: none;
+    color: var(--soft-beige);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    padding: 16px 20px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .waitlist-form input::placeholder { color: var(--mid-gray); }
+  .waitlist-form input:focus { border-color: rgba(181,172,177,0.5); }
+  .waitlist-form button {
+    background: var(--soft-beige);
+    color: var(--deep-black);
+    border: 1px solid var(--soft-beige);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .waitlist-form button:hover { background: var(--light-mauve); border-color: var(--light-mauve); }
+
+  .hero-sub-note {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    margin-top: 18px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.8s forwards;
+  }
+  .scroll-hint span {
+    font-size: 0.5rem;
+    letter-spacing: 0.5em;
+    color: var(--charcoal);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--charcoal), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--charcoal);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid rgba(181,172,177,0.1);
+    border-bottom: 1px solid rgba(181,172,177,0.1);
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker-item {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--soft-beige);
+    margin: 0 40px;
+  }
+  .ticker-dot {
+    color: var(--light-mauve);
+    margin: 0 20px;
+  }
+
+  /* ── WHAT IS FABRIKAAYA ── */
+  .section {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.5em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--charcoal);
+  }
+
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .big-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--soft-beige);
+  }
+  .big-statement em {
+    font-style: italic;
+    color: var(--light-mauve);
+  }
+
+  .body-text {
+    font-size: 0.85rem;
+    line-height: 2;
+    color: var(--mid-gray);
+    margin-bottom: 24px;
+  }
+
+  .inline-stat {
+    display: flex;
+    gap: 48px;
+    margin-top: 40px;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--soft-beige);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ── WHO IT'S FOR ── */
+  .for-section {
+    padding: 120px 60px;
+    background: rgba(84,68,73,0.12);
+    border-top: 1px solid rgba(181,172,177,0.07);
+    border-bottom: 1px solid rgba(181,172,177,0.07);
+  }
+  .for-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .for-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .for-card {
+    background: var(--deep-black);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .for-card:hover { background: rgba(33,23,25,0.7); }
+  .for-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .for-card:hover::before { background: var(--light-mauve); }
+  .for-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(181,172,177,0.1);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .for-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--soft-beige);
+    margin-bottom: 16px;
+  }
+  .for-desc {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: var(--mid-gray);
+  }
+
+  /* ── FEATURES ── */
+  .features-section {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .feature-card {
+    padding: 48px 40px;
+    border: 1px solid rgba(181,172,177,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-icon {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--soft-beige);
+    margin-bottom: 14px;
+  }
+  .feature-desc {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: var(--mid-gray);
+  }
+  .feature-soon {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 0.48rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    border: 1px solid var(--charcoal);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* ── MYSTERY SECTION ── */
+  .mystery {
+    padding: 160px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mystery-bg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(84,68,73,0.3) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .mystery-border {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(181,172,177,0.07);
+  }
+  .mystery-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--soft-beige);
+    line-height: 1.3;
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .mystery-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.45em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-top: 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    padding: 120px 60px;
+    background: var(--soft-beige);
+    text-align: center;
+  }
+  .final-cta .section-label { color: var(--charcoal); justify-content: center; }
+  .final-cta .section-label::after { display: none; }
+  .final-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    color: var(--deep-black);
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .final-cta-title em { font-style: italic; color: var(--charcoal); }
+  .final-cta-sub {
+    font-size: 0.85rem;
+    color: var(--mid-gray);
+    line-height: 1.9;
+    max-width: 460px;
+    margin: 0 auto 48px;
+  }
+  .final-form {
+    display: flex;
+    gap: 0;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .final-form input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(84,68,73,0.3);
+    border-right: none;
+    color: var(--deep-black);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    padding: 16px 20px;
+    outline: none;
+  }
+  .final-form input::placeholder { color: var(--mid-gray); }
+  .final-form button {
+    background: var(--deep-black);
+    color: var(--soft-beige);
+    border: 1px solid var(--deep-black);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .final-form button:hover { background: var(--charcoal); border-color: var(--charcoal); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(181,172,177,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--soft-beige);
+  }
+  .footer-mid {
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .footer-right {
+    display: flex;
+    gap: 28px;
+  }
+  .footer-link {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    color: var(--mid-gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-link:hover { color: var(--soft-beige); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-right .nav-tag { display: none; }
+    .section { padding: 80px 24px; }
+    .split-section { grid-template-columns: 1fr; gap: 48px; }
+    .for-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .for-section, .features-section { padding: 80px 24px; }
+    .mystery { padding: 100px 24px; }
+    .final-cta { padding: 80px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    .footer-right { justify-content: center; }
+    .waitlist-form, .final-form { flex-direction: column; }
+    .waitlist-form input, .final-form input { border-right: 1px solid rgba(181,172,177,0.2); border-bottom: none; }
+    .final-form input { border-right: 1px solid rgba(84,68,73,0.3); border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Fabrikaaya</a>
+  <div class="nav-right">
+    <span class="nav-tag">Launching Soon</span>
+    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle hbc1"></div>
+  <div class="hero-bg-circle hbc2"></div>
+
+  <div class="hero-eyebrow">The Fabric Revolution Has Arrived</div>
+  <h1 class="hero-title">
+    Fabri<em>kaaya</em>
+  </h1>
+  <p class="hero-tagline">"Because you are one of a kind."</p>
+  <p class="hero-desc">
+    India's first curated digital marketplace for fabric — connecting suppliers, designers, and manufacturers in one seamless ecosystem. Built for those who refuse to compromise on quality.
+  </p>
+  <div class="waitlist-form" id="waitlist">
+    <input type="email" placeholder="your@email.com" id="heroEmail">
+    <button onclick="joinWaitlist('heroEmail')">Join Waitlist</button>
+  </div>
+  <p class="hero-sub-note" id="heroMsg">Be the first to know when we launch.</p>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Fabric Sourcing</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Designer Tools</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Verified Suppliers</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Visual Search</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">AI Recommendations</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Sample Orders</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">B2B Marketplace</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Launching 2026</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Fabric Sourcing</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Designer Tools</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Verified Suppliers</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Visual Search</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">AI Recommendations</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Sample Orders</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">B2B Marketplace</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Launching 2026</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- WHAT IS FABRIKAAYA -->
+<section class="section">
+  <div class="section-label">What is Fabrikaaya</div>
+  <div class="split-section">
+    <div class="big-statement">
+      Fabric sourcing<br>was <em>broken.</em><br>We fixed it.
+    </div>
+    <div>
+      <p class="body-text">
+        The Indian textile industry runs on $150 billion in transactions — and most of it still happens through intermediaries, phone calls, and physical visits to wholesale markets. Designers waste weeks finding the right fabric. Suppliers struggle to reach buyers beyond their geography.
+      </p>
+      <p class="body-text">
+        Fabrikaaya is the platform that changes all of this. A curated, technology-first marketplace where quality fabrics meet the people who need them — efficiently, transparently, and beautifully.
+      </p>
+      <div class="inline-stat">
+        <div class="stat-item">
+          <div class="stat-num">$1.5T</div>
+          <div class="stat-label">Global Textile Market</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12%</div>
+          <div class="stat-label">Currently Digital</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">88%</div>
+          <div class="stat-label">Our Opportunity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<div class="for-section">
+  <div class="for-inner">
+    <div class="section-label">Who We're Building For</div>
+    <div class="for-grid">
+      <div class="for-card">
+        <div class="for-number">01</div>
+        <div class="for-title">Fashion Designers</div>
+        <div class="for-desc">Independent and emerging designers who deserve access to the finest fabrics — without spending weeks looking for them.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-number">02</div>
+        <div class="for-title">Fabric Suppliers</div>
+        <div class="for-desc">Verified textile manufacturers and wholesalers who want a nationwide buyer network without the cost of physical showrooms.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-number">03</div>
+        <div class="for-title">Garment Manufacturers</div>
+        <div class="for-desc">Production houses that need reliable, quality-assured sourcing with transparent pricing and bulk order management.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-number">04</div>
+        <div class="for-title">Boutique Owners</div>
+        <div class="for-desc">Small to medium retailers who require diverse, trend-forward fabric inventory without minimum-order headaches.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-number">05</div>
+        <div class="for-title">Craft Enthusiasts</div>
+        <div class="for-desc">Home crafters, DIY creators, and fabric hobbyists who want specialty fabrics delivered to their doorstep.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-number">06</div>
+        <div class="for-title">Interior Designers</div>
+        <div class="for-desc">Professionals sourcing upholstery and decorative fabrics who value quality, range, and efficient procurement.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="section-label">Platform Features</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-soon">Coming</div>
+      <div class="feature-icon">✦</div>
+      <div class="feature-title">Advanced Fabric Discovery</div>
+      <div class="feature-desc">Search by material, weight, weave, color, and pattern. Visual search lets you upload a reference image to find similar fabrics instantly.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-soon">Coming</div>
+      <div class="feature-icon">◈</div>
+      <div class="feature-title">AI-Powered Recommendations</div>
+      <div class="feature-desc">Personalized fabric suggestions based on your design style, past preferences, and seasonal trend predictions.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-soon">Coming</div>
+      <div class="feature-icon">◇</div>
+      <div class="feature-title">Sample Ordering System</div>
+      <div class="feature-desc">Order physical swatches before committing to bulk. Touch and feel before you decide — just like walking into a showroom, but better.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-soon">Coming</div>
+      <div class="feature-icon">⬡</div>
+      <div class="feature-title">Designer Collaboration Tools</div>
+      <div class="feature-desc">Portfolio showcase, client workspace, fabric moodboards, and collaboration tools built specifically for how designers actually work.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MYSTERY QUOTE -->
+<section class="mystery">
+  <div class="mystery-bg"></div>
+  <div class="mystery-border"></div>
+  <p class="mystery-text">
+    "The right fabric has always existed. It was just never easy to find."
+  </p>
+  <p class="mystery-sub">Fabrikaaya — Changing that. Soon.</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="join">
+  <div class="section-label">Get Early Access</div>
+  <h2 class="final-cta-title">
+    Be the first<br>to <em>experience it.</em>
+  </h2>
+  <p class="final-cta-sub">
+    Join the waitlist and get early access, exclusive previews, and founding member privileges when Fabrikaaya launches.
+  </p>
+  <div class="final-form">
+    <input type="email" placeholder="Enter your email" id="finalEmail">
+    <button onclick="joinWaitlist('finalEmail')">Notify Me</button>
+  </div>
+  <p style="font-size:0.58rem; letter-spacing:0.3em; color:var(--mid-gray); text-transform:uppercase; margin-top:18px;" id="finalMsg">No spam. Just the launch.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Fabrikaaya</div>
+  <div class="footer-mid">© 2026 Fabrikaaya · The Fabric Revolution Has Arrived</div>
+  <div class="footer-right">
+    <a href="#" class="footer-link">Instagram</a>
+    <a href="#" class="footer-link">Facebook</a>
+    <a href="#" class="footer-link">Contact</a>
+  </div>
+</footer>
+
+<script>
+function joinWaitlist(inputId) {
+  const input = document.getElementById(inputId);
+  const msgId = inputId === 'heroEmail' ? 'heroMsg' : 'finalMsg';
+  const msg = document.getElementById(msgId);
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(181,172,177,0.6)';
+    input.placeholder = 'Enter a valid email';
+    return;
+  }
+  input.value = '';
+  input.placeholder = 'you@email.com';
+  msg.textContent = '✦ You\'re on the list. We\'ll be in touch.';
+  msg.style.color = 'var(--light-mauve)';
+}
+</script>
+</body>
+</html>

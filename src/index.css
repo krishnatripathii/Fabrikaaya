@@ -1,0 +1,166 @@
+:root {
+  --deep-black: #211719;
+  --charcoal: #544449;
+  --mid-gray: #82777F;
+  --light-mauve: #B5ACB1;
+  --soft-beige: #E8DCE0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--deep-black);
+  color: var(--soft-beige);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  color: var(--soft-beige);
+}
+
+.title-italic {
+  font-style: italic;
+  color: var(--light-mauve);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utility classes to re-use design language */
+.bg-deep-black { background-color: var(--deep-black); }
+.bg-charcoal { background-color: var(--charcoal); }
+.bg-soft-beige { background-color: var(--soft-beige); }
+
+.text-soft-beige { color: var(--soft-beige); }
+.text-light-mauve { color: var(--light-mauve); }
+.text-mid-gray { color: var(--mid-gray); }
+.text-deep-black { color: var(--deep-black); }
+
+.eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.6em;
+  color: var(--light-mauve);
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--deep-black);
+  background: var(--soft-beige);
+  padding: 12px 28px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--light-mauve);
+}
+
+.btn-outline {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--soft-beige);
+  background: transparent;
+  padding: 12px 28px;
+  border: 1px solid var(--soft-beige);
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: rgba(232,220,224,0.1);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--light-mauve);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(232,220,224,0.07);
+  border: 1px solid rgba(181,172,177,0.2);
+  color: var(--soft-beige);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: rgba(181,172,177,0.5);
+}
+
+/* App container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 100px; /* space for fixed nav */
+}
+
+/* Page containers */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Background decorative circles */
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bc1 {
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(84,68,73,0.35) 0%, transparent 65%);
+  top: -100px; left: -200px;
+}
+
+.bc2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(181,172,177,0.1) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+}

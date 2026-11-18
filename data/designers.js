@@ -1,0 +1,66 @@
+export const designers = [
+  {
+    slug: "meera-kasliwal",
+    name: "Meera Kasliwal",
+    city: "Jaipur",
+    craft: "Block print & Bandhani",
+    palette: ["#B5472B", "#E3A72F", "#F6F0E6"],
+    openToCommissions: true,
+    specialities: ["Block print", "Bandhani", "Natural dyes"],
+    bio: "Third-generation printer working with natural dyes and hand-carved teak blocks. Her studio in Jaipur turns monsoon-soaked cotton into slow, wearable gardens.",
+  },
+  {
+    slug: "farhan-qadri",
+    name: "Farhan Qadri",
+    city: "Lucknow",
+    craft: "Chikankari",
+    palette: ["#5A4A3C", "#B5472B", "#F6F0E6"],
+    openToCommissions: true,
+    specialities: ["Chikankari", "Shadow work", "Mulmul"],
+    bio: "Trained under master karigars in old Lucknow, Farhan draws every motif by hand before a single stitch is placed. His work is whisper-quiet and endlessly detailed.",
+  },
+  {
+    slug: "rukmini-pandey",
+    name: "Rukmini Pandey",
+    city: "Varanasi",
+    craft: "Banarasi handloom",
+    palette: ["#1F2A44", "#E3A72F", "#B5472B"],
+    openToCommissions: false,
+    specialities: ["Banarasi brocade", "Zari weaving", "Bridal"],
+    bio: "Rukmini works with a cooperative of 14 weavers on the banks of the Ganga, reviving old Mughal boota patterns in modern silhouettes.",
+  },
+  {
+    slug: "zainab-khatri",
+    name: "Zainab Khatri",
+    city: "Kutch",
+    craft: "Ajrakh",
+    palette: ["#1F2A44", "#B5472B", "#F6F0E6"],
+    openToCommissions: true,
+    specialities: ["Ajrakh", "Indigo dyeing", "Resist printing"],
+    bio: "From a family of Ajrakh printers in Kutch, Zainab layers indigo and madder across sixteen stages of washing, printing and dyeing for each length of cloth.",
+  },
+  {
+    slug: "anand-reddy",
+    name: "Anand Reddy",
+    city: "Pochampally",
+    craft: "Ikat",
+    palette: ["#B5472B", "#1F2A44", "#E3A72F"],
+    openToCommissions: true,
+    specialities: ["Double ikat", "Telia rumal", "Cotton & silk"],
+    bio: "Anand ties and dyes the yarn before it's ever woven, which is why every Pochampally ikat piece has softly blurred edges that no machine can copy.",
+  },
+  {
+    slug: "devika-sahu",
+    name: "Devika Sahu",
+    city: "Bilaspur, Chhattisgarh",
+    craft: "Kosa silk",
+    palette: ["#5A4A3C", "#E3A72F", "#F6F0E6"],
+    openToCommissions: true,
+    specialities: ["Kosa tussar", "Zari borders", "Contemporary drapes"],
+    bio: "Devika brings Chhattisgarh's golden Kosa silk to the contemporary wardrobe, working directly with village reelers from Champa and Raigarh.",
+  },
+];
+
+export function getDesignerBySlug(slug) {
+  return designers.find((d) => d.slug === slug);
+}
